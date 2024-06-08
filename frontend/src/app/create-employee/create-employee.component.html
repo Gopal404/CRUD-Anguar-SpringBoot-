@@ -1,0 +1,59 @@
+
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Add New Employee</h3>
+          </div>
+          <div class="card-body">
+            <form #employeeForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName"
+                  required>
+                <!-- Display validation error message -->
+                <div
+                  *ngIf="employeeForm.controls['firstName'].invalid && (employeeForm.controls['firstName'].dirty || employeeForm.controls['firstName'].touched)"
+                  class="text-danger">
+                  First Name is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName"
+                  required>
+                <div
+                  *ngIf="employeeForm.controls['lastName'].invalid && (employeeForm.controls['lastName'].dirty || employeeForm.controls['lastName'].touched)"
+                  class="text-danger">
+                  Last Name is required
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="emailId" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="emailId" [(ngModel)]="employee.emailId" name="emailId"
+                  required email>
+                <div
+                  *ngIf="employeeForm.controls['emailId'].invalid && (employeeForm.controls['emailId'].dirty || employeeForm.controls['emailId'].touched)"
+                  class="text-danger">
+                  <div *ngIf="employeeForm.controls['emailId'].hasError('required')">Email is required</div>
+                  <div *ngIf="employeeForm.controls['emailId'].hasError('email')">Please enter a valid email address
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-success" type="submit" [disabled]="employeeForm.invalid">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+<!-- Bootstrap modal for error messages -->
+<div class="modal" id="errorModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: red">Email ID Already Exist!</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
